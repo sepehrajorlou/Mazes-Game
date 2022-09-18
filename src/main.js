@@ -1,5 +1,5 @@
 
-import { findAllId, AllId } from './General.js';
+import { findAllId, AllId , startkeyvisibilitycheck , start } from './General.js';
 import { TopAndBottom, LeftAndRight, result, finish, resetRange, outOfRange, resetPointer } from './Directives.js';
 import store from './store/store.js';
 
@@ -8,8 +8,24 @@ const container = document.querySelector("#container");
 const pointer = document.querySelector("#pointer");
 
 
+
+
+
+
+
+
 // Get All Id of the boxes =>
 findAllId();
+
+startkeyvisibilitycheck();
+
+start();
+
+
+
+
+
+
 
 
 
@@ -18,6 +34,7 @@ findAllId();
 
 body.addEventListener("keydown", (e) => {
     let preventKey = store.preventKey;
+    store.KeyPressincreasing();
     if ((e.key == "s" || e.key == "ArrowDown") && !preventKey) {
         let style = window.getComputedStyle(pointer);
         let topProperty = style.getPropertyValue('top').replaceAll("px", "");

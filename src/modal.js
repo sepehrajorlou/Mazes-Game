@@ -1,5 +1,5 @@
 import { playDefeatSound, PlayWinSound, PauseWinSound } from './Sounds.js';
-import { resetPointer } from './Directives.js';
+import { Timer, resetPointer } from './Directives.js';
 import store from './store/store.js';
 
 
@@ -12,6 +12,7 @@ function modalWin() {
     modal.style.display = "block";
     // preventKey = true;
     store.PreventKeyTrueFalseSetterFunction(true);
+    store.ResetCounterKeyPress();
     PlayWinSound();
     Reset.onclick = () => {
         modal.style.display = "none";
@@ -27,11 +28,15 @@ function modalDefeat() {
     const modal = document.querySelector("#myModal");
     const close = document.querySelector(".close");
     modal.style.display = "block";
+    store.ResetCounterKeyPress();
     close.onclick = () => {
         modal.style.display = "none";
         // preventKey = false;
-        store. PreventKeyTrueFalseSetterFunction(false);
+        store.PreventKeyTrueFalseSetterFunction(false);
+        Timer(store.Time , true);
     }
     // defeat modal function 
 }
+
+
 export { modalWin, modalDefeat }

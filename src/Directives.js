@@ -30,6 +30,7 @@ function result() {
     if (TopBottom == true && LeftRight == true) {
         console.log(true);
         resetRange();
+        Timer(null,true)
     } else {
         return null;
     }
@@ -39,7 +40,7 @@ function result() {
 function finish() {
 
     if (TopBottom == true && LeftRight == true) {
-        console.log(true);
+
         modalWin();
     } else {
         return null;
@@ -73,4 +74,28 @@ function resetPointer() {
     pointer.style.left = "0px";
     pointer.style.right = "0px";
 }
-export { TopAndBottom, LeftAndRight, result, finish, resetRange, outOfRange, resetPointer };
+
+function Timer(time, exit) {
+    const timerSelect = document.querySelector("#timerSelect");
+    let sec = time;
+    const Time = setInterval(function () {
+        sec--;
+        timerSelect.innerHTML = sec;
+        store.TimeSecond = "0";
+        if (sec <= 0) {
+            clearInterval(Time);
+            if (exit) {
+                store.TimeSecond = "0";
+            } else if (sec <= 0 && !store.Win) {
+                resetRange();
+            } else {
+                return;
+            }
+        }
+        if (exit) {
+            return;
+        }
+    }, 1000);
+}
+
+export { TopAndBottom, LeftAndRight, result, finish, resetRange, outOfRange, resetPointer, Timer };
